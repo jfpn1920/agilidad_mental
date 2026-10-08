@@ -1,0 +1,84 @@
+/* ===== VARIABLES: colores reutilizables ===== */
+:root {
+    --fondo: #e6e3f5;       /* lavanda suave de fondo */
+    --tinta: #2b2768;       /* índigo para textos y títulos */
+    --objetivo: #e0287d;    /* rosado intenso del botón objetivo */
+    --arena: #fbfaff;       /* color de la zona de juego */
+    --linea: #c9c3ea;       /* bordes suaves */
+    --error: #c0392b;       /* rojo para errores */
+}
+/* Quita márgenes por defecto y simplifica el cálculo de tamaños */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+/* Fondo de la página y tipografía general */
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 28px 14px;
+    font-family: 'Rubik', Arial, sans-serif;
+    color: var(--tinta);
+    background: var(--fondo);
+}
+/* Tarjeta principal que contiene todo el juego */
+.juego { width: 100%; max-width: 640px; }
+h1 { font-family: 'Rubik Mono One', sans-serif; font-size: 1.9rem; line-height: 1.2; }
+h2 { margin: 26px 0 10px; font-size: 1.2rem; }
+.subtitulo { margin: 8px 0 22px; line-height: 1.5; }
+/* Clase que oculta cualquier elemento (JS la agrega y la quita) */
+.oculto { display: none !important; }
+/* Campos del formulario */
+.etiqueta { display: block; margin: 14px 0 6px; font-weight: 700; }
+input, select { width: 100%; padding: 12px; font: inherit; color: var(--tinta); background: #fff; border: 2px solid var(--tinta); border-radius: 8px; }
+.error { margin-top: 8px; color: var(--error); font-weight: 700; }
+/* Botón principal y botón secundario (solo borde) */
+.boton {
+    margin-top: 18px;
+    padding: 12px 26px;
+    font: inherit;
+    font-weight: 700;
+    color: #fff;
+    background: var(--tinta);
+    border: 2px solid var(--tinta);
+    border-radius: 8px;
+    cursor: pointer;
+}
+.boton:hover { opacity: 0.88; }
+.boton.secundario { color: var(--tinta); background: transparent; }
+/* Botón con aspecto de enlace */
+.boton-texto { margin: 18px 0 0 14px; font: inherit; color: var(--tinta); background: none; border: none; text-decoration: underline; cursor: pointer; }
+.acciones .boton-texto { margin-left: 8px; }
+/* Foco visible para quien navega con el teclado */
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--objetivo); outline-offset: 2px; }
+/* Marcadores en una fila de cuatro columnas */
+.marcadores { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center; }
+.marcadores div { padding: 8px 4px; background: #fff; border: 2px solid var(--linea); border-radius: 8px; }
+.marcadores small { display: block; font-size: 0.75rem; opacity: 0.7; }
+.marcadores span { font-weight: 700; word-break: break-word; }
+.numero { font-family: 'Rubik Mono One', sans-serif; font-size: 1.3rem; }
+/* Zona de juego: el objetivo se posiciona dentro de ella */
+.arena {
+    position: relative;
+    height: 320px;
+    margin-top: 14px;
+    overflow: hidden;
+    background: var(--arena);
+    border: 3px dashed var(--tinta);
+    border-radius: 12px;
+}
+/* Botón objetivo: redondo y con posición absoluta */
+.objetivo { position: absolute; border: none; border-radius: 50%; background: var(--objetivo); box-shadow: 0 4px 0 #9c1457; cursor: pointer; }
+.objetivo:active { transform: translateY(3px); box-shadow: 0 1px 0 #9c1457; }
+/* Mensaje centrado dentro de la arena */
+.mensaje { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; font-weight: 700; font-size: 1.2rem; line-height: 1.4; pointer-events: none; }
+/* Lista del historial */
+.historial { padding-left: 22px; line-height: 1.8; }
+.historial:empty::after { content: "Aún no hay partidas."; margin-left: -22px; opacity: 0.7; }
+/* En pantallas pequeñas se ajustan los tamaños */
+@media (max-width: 480px) {
+    h1 { font-size: 1.5rem; }
+    .numero { font-size: 1.05rem; }
+    .arena { height: 280px; }
+}
+/* Respeta a quienes prefieren menos movimiento en pantalla */
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+.ayuda { margin-top: 14px; font-size: 0.9rem; opacity: 0.75; }

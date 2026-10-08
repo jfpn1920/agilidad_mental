@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>agilidad mental</title>
+    <link rel="stylesheet" href="agilidad_mental.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <script src="agilidad_mental.js" defer></script>
+</head>
+<body>
+    <!------------------------------------>
+    <!--|estructuracion_agilidad_mental|-->
+    <!------------------------------------>
+    <main class="juego">
+        <!-- Encabezado con el título y las instrucciones.
+        Nota: esta página no lleva footer. -->
+        <header>
+            <h1>Agilidad Mental</h1>
+            <p class="subtitulo">Haz clic en el botón rosado cada vez que cambie de lugar. Tienes 20 segundos.</p>
+        </header>
+        <!-- PANTALLA 1: datos del jugador -->
+        <section id="pantalla-inicio" class="pantalla">
+            <!-- Etiqueta asociada al campo de nombre -->
+            <label for="campo-nombre" class="etiqueta">Tu nombre</label>
+            <!-- Campo de texto para el nombre (se guarda en localStorage) -->
+            <input id="campo-nombre" type="text" placeholder="Escribe tu nombre" maxlength="20" autocomplete="off">
+            <!-- Mensaje de error si el campo está vacío -->
+            <p id="error-nombre" class="error oculto">Escribe tu nombre para continuar.</p>
+            <!-- Dificultad: cambia el tamaño del botón objetivo.
+            Cuanto más pequeño es el botón, más difícil resulta acertar. -->
+            <label for="campo-nivel" class="etiqueta">Dificultad</label>
+            <select id="campo-nivel">
+                <option value="facil">Fácil (botón grande)</option>
+                <option value="normal" selected>Normal (botón mediano)</option>
+                <option value="dificil">Difícil (botón pequeño)</option>
+            </select>
+            <!-- Botón que guarda los datos y lleva a la pantalla del juego -->
+            <button id="btn-comenzar" class="boton">Entrar al juego</button>
+        </section>
+        <!-- PANTALLA 2: el juego. Está oculta hasta que el jugador escribe su nombre -->
+        <section id="pantalla-juego" class="pantalla oculto">
+            <!-- Marcadores: jugador, tiempo, puntos y récord -->
+            <div class="marcadores">
+                <div><small>Jugador</small><span id="jugador"></span></div>
+                <div><small>Tiempo</small><span id="tiempo" class="numero"></span></div>
+                <div><small>Clics</small><span id="puntos" class="numero"></span></div>
+                <div><small>Récord</small><span id="record" class="numero"></span></div>
+            </div>
+            <!-- Zona de juego: aquí se mueve el botón objetivo -->
+            <div id="arena" class="arena">
+                <!-- Botón que hay que presionar (JavaScript cambia su posición) -->
+                <button id="objetivo" class="objetivo oculto" aria-label="Botón objetivo"></button>
+                <!-- Mensajes sobre la zona de juego (instrucciones, pausa y resultado) -->
+                <p id="mensaje" class="mensaje"></p>
+            </div>
+            <!-- Ayuda breve para quien juega -->
+            <p class="ayuda">Tu partida se guarda sola: si refrescas la página, podrás continuar.</p>
+            <!-- Botones de control -->
+            <div class="acciones">
+                <!-- Inicia, continúa o repite la partida -->
+                <button id="btn-iniciar" class="boton">Iniciar</button>
+                <!-- Detiene el tiempo y guarda la partida -->
+                <button id="btn-pausa" class="boton secundario oculto">Pausar</button>
+                <!-- Vuelve a la pantalla de nombre -->
+                <button id="btn-salir" class="boton-texto">Cambiar jugador</button>
+            </div>
+            <!-- Últimas partidas guardadas.
+            La lista se llena con JavaScript y se conserva en localStorage. -->
+            <h2>Últimas partidas</h2>
+            <ol id="historial" class="historial"></ol>
+            <!-- Borra el historial y el récord -->
+            <button id="btn-borrar" class="boton-texto">Borrar historial y récord</button>
+        </section>
+    </main>
+    <!-- Aviso por si el navegador tiene JavaScript desactivado -->
+    <noscript>Activa JavaScript para poder jugar.</noscript>
+</body>
+</html>
